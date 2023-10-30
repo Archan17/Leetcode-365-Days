@@ -1,0 +1,18 @@
+Link : https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/
+
+class Solution {
+public:
+    static bool comp(int a, int b){
+        int cnta = 0, cntb = 0;
+        for(int i = 31; i >= 0; i--){
+            if(a & (1 << i))    cnta++;
+            if(b & (1 << i))    cntb++;
+        }
+        if(cnta == cntb)    return a < b;
+        return cnta < cntb;
+    }
+    vector<int> sortByBits(vector<int>& arr) {
+        sort(arr.begin(), arr.end(), comp);
+        return arr;
+    }
+};
