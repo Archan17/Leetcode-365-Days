@@ -1,0 +1,48 @@
+Link : https://leetcode.com/problems/find-mode-in-binary-search-tree/description/?envType=daily-question&envId=2023-11-01
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> findMode(TreeNode* root) {
+        unordered_map<int, int> countMap; 
+        int maxCount = 0;
+
+        // For in-order traversal of the BST
+        inOrder(root, countMap, maxCount);
+
+        vector<int> modes;
+        // Find maxCount and add them to the result
+        for (const auto& entry : countMap) {
+            if (entry.second == maxCount) {
+                modes.push_back(entry.first);
+            }
+        }
+
+        return modes;
+    }
+
+    void inOrder(TreeNode* node, unordered_map<int, int>& countMap, int& maxCount) {
+        if (node == nullptr) {
+            return;
+        }
+
+        inOrder(node->left, countMap, maxCount);
+
+        // Update the count for the current element
+        countMap[node->val]++;
+        maxCount = max(maxCount, countMap[node->val]);
+
+        inOrder(node->right, countMap, maxCount);
+    }
+};
