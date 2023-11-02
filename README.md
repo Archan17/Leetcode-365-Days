@@ -11,7 +11,6 @@ Are you ready to embark on a coding journey and tackle a new LeetCode problem ev
 ## Features ⚔️
 
 - A new LeetCode problem solved every day.
-- Solutions in various programming languages.
 - Detailed explanations and code walkthroughs.
 
 ## Contribution 🤝
