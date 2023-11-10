@@ -1,0 +1,43 @@
+Link : https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/
+
+class Solution {
+public:
+    vector<int> restoreArray(vector<vector<int>>& adjacentPairs) {
+        // Initialize a vector to store the final result
+        vector<int> ans;
+        // Create an unordered_map to represent the graph where the key is a node, and the value is a vector of adjacent nodes
+        unordered_map<int, vector<int>> gr;
+
+        // Populate the graph based on the given adjacentPairs
+        for (auto p : adjacentPairs) {
+            gr[p[0]].push_back(p[1]);
+            gr[p[1]].push_back(p[0]);
+        }
+
+        // Find the starting node of the array
+        for (auto nodePair : gr) {
+            if (nodePair.second.size() == 1) {
+                ans.push_back(nodePair.first);
+                ans.push_back(nodePair.second[0]);
+                break;
+            }
+        }
+
+        // Continue building the array until it is complete
+        while (ans.size() < gr.size()) {
+            int lastElement = ans[ans.size() - 1];
+            int secondLastElement = ans[ans.size() - 2];
+            vector<int> ne = gr[lastElement];
+
+            // Choose the next element based on the adjacency
+            if (ne[0] != secondLastElement) {
+                ans.push_back(ne[0]);
+            } else {
+                ans.push_back(ne[1]);
+            }
+        }
+
+        // Return the restored array
+        return ans;
+    }
+};
