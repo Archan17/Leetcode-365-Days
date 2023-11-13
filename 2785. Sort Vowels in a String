@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool isVowel(char ch){
+        return (ch=='a' || ch=='A' || ch=='e' || ch=='E' || ch=='i' || ch=='I' || ch=='o' ||
+        ch=='O' || ch=='u' || ch=='U');
+    }
+    static bool comp(char &a,char &b){
+        return b>a;
+    }
+    string sortVowels(string s) {
+        int n=s.size();
+        string t(n,'@');
+        vector<char> arr;
+        for(int i=0;i<n;i++){
+            if(isVowel(s[i])==0) t[i]=s[i];
+            else arr.push_back(s[i]);
+        }
+        sort(arr.begin(),arr.end(),comp);
+        int x=0;
+        for(int i=0;i<n;i++){
+            if(t[i]=='@') t[i]=arr[x++];
+        }
+        return t;
+    }
+};
