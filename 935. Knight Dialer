@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int knightDialer(int n) {
+        long long b = 20, c = 6, d = 8;
+        if (n == 1) {
+            return 10;
+        }
+        if (n == 2) {
+            return b;
+        }
+        for (int a = 3; a < n + 1; a += 2) {
+            b = (b * 2 + c) % 1000000007;
+            if (a == n) {
+                break;
+            }
+            c = c * 2;
+            b = (b * 2 + c) % 1000000007;
+            c = (c * 2 + d)  % 1000000007;
+            d = c +d ;
+        }
+        return b % 1000000007;
+    }
+};
