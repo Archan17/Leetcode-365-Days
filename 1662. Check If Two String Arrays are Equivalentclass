@@ -1,0 +1,9 @@
+class Solution:
+    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+        first_str = ''.join(map(str, word1))
+        second_str = ''.join(map(str, word2))
+        
+        if first_str == second_str:
+            return True
+
+        return False
